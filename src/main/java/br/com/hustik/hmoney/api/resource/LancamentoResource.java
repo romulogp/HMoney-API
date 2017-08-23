@@ -4,6 +4,7 @@ import br.com.hustik.hmoney.api.event.RecursoCriadoEvent;
 import br.com.hustik.hmoney.api.exceptionhandler.CustomResponseEntityExceptionHandler.Erro;
 import br.com.hustik.hmoney.api.model.Lancamento;
 import br.com.hustik.hmoney.api.repository.LancamentoRepository;
+import br.com.hustik.hmoney.api.repository.filter.LancamentoFilter;
 import br.com.hustik.hmoney.api.service.LancamentoService;
 import br.com.hustik.hmoney.api.service.exception.PessoaInexistenteOuInativaException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,8 @@ public class LancamentoResource {
     private MessageSource messageSource;
 
     @GetMapping
-    private List<Lancamento> listar() {
-        return lancamentoRepository.findAll();
+    private List<Lancamento> pesquisar(LancamentoFilter lancamentoFilter) {
+        return lancamentoRepository.filtrar(lancamentoFilter);
     }
 
     @GetMapping("/{codigo}")
