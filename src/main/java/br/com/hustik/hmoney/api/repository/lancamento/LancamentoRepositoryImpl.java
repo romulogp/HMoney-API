@@ -1,6 +1,7 @@
 package br.com.hustik.hmoney.api.repository.lancamento;
 
 import br.com.hustik.hmoney.api.model.Lancamento;
+import br.com.hustik.hmoney.api.model.Lancamento_;
 import br.com.hustik.hmoney.api.repository.filter.LancamentoFilter;
 import org.springframework.util.StringUtils;
 
@@ -37,15 +38,15 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
         List<Predicate> predicates = new ArrayList<>();
         if (!StringUtils.isEmpty(lancamentoFilter.getDescricao())) {
             predicates.add(builder.like(
-                    builder.lower(root.get("descricao")), "%" + lancamentoFilter.getDescricao().toLowerCase() + "%"));
+                    builder.lower(root.get(Lancamento_.descricao)), "%" + lancamentoFilter.getDescricao().toLowerCase() + "%"));
         }
         if (lancamentoFilter.getDataVencimentoDe() != null) {
             predicates.add(builder.greaterThanOrEqualTo(
-                    root.get("dataVencimento"), lancamentoFilter.getDataVencimentoDe()));
+                    root.get(Lancamento_.dataVencimento), lancamentoFilter.getDataVencimentoDe()));
         }
         if (lancamentoFilter.getDataVencimentoAte() != null) {
             predicates.add(builder.lessThanOrEqualTo(
-                    root.get("dataVencimento"), lancamentoFilter.getDataVencimentoAte()));
+                    root.get(Lancamento_.dataVencimento), lancamentoFilter.getDataVencimentoAte()));
         }
         return predicates.toArray(new Predicate[predicates.size()]);
     }
