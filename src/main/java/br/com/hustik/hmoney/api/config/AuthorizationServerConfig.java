@@ -26,7 +26,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .secret("@ngul@r0")
                 .scopes("read", "write")
                 .authorizedGrantTypes("password", "refresh_token") // permite obter novo access_token através do refresh_token
-                .accessTokenValiditySeconds(20) // 20 segundos para testes com refresh token
+                .accessTokenValiditySeconds(40) // 20 segundos para testes com refresh token
                 .refreshTokenValiditySeconds(3600 * 24); // refresh_token válido por 1 dia
         /*
          * É possível definir scopes diferentes para clientes diferentes
