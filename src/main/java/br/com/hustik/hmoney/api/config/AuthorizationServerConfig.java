@@ -21,17 +21,24 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory() // é possível configurar para buscar info no banco de dados
+        clients.inMemory() // É possível configurar para buscar info no banco de dados
                 .withClient("angular")
                 .secret("@ngul@r0")
                 .scopes("read", "write")
                 .authorizedGrantTypes("password", "refresh_token") // permite obter novo access_token através do refresh_token
-                .accessTokenValiditySeconds(40) // 20 segundos para testes com refresh token
-                .refreshTokenValiditySeconds(3600 * 24); // refresh_token válido por 1 dia
-        /*
-         * É possível definir scopes diferentes para clientes diferentes
-         * Portanto, para utilizar os Scopes definidos aqui, é necessário realizar o devivo tratamento para que tenham efeito e façam sentido
-         */
+                .accessTokenValiditySeconds(1800) // 20 segundos para testes com refresh token
+                .refreshTokenValiditySeconds(3600 * 24) // refresh_token válido por 1 dia
+            .and()
+                .withClient("mobile")
+                .secret("m0b1l30")
+                .scopes("read")
+                .authorizedGrantTypes("password", "refresh_token")
+                .accessTokenValiditySeconds(1800)
+                .refreshTokenValiditySeconds(3600 * 24);
+                /*
+                 * É possível definir scopes diferentes para clientes diferentes
+                 * Portanto, para utilizar os Scopes definidos aqui, é necessário realizar o devivo tratamento para que tenham efeito e façam sentido
+                 */
     }
 
     @Override
