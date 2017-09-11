@@ -5,6 +5,7 @@ import br.com.hustik.hmoney.api.exceptionhandler.CustomResponseEntityExceptionHa
 import br.com.hustik.hmoney.api.model.Lancamento;
 import br.com.hustik.hmoney.api.repository.LancamentoRepository;
 import br.com.hustik.hmoney.api.repository.filter.LancamentoFilter;
+import br.com.hustik.hmoney.api.repository.projection.ResumoLancamento;
 import br.com.hustik.hmoney.api.service.LancamentoService;
 import br.com.hustik.hmoney.api.service.exception.PessoaInexistenteOuInativaException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,12 @@ public class LancamentoResource {
     @PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
     public Page<Lancamento> pesquisar(LancamentoFilter lancamentoFilter, Pageable pageable) {
         return lancamentoRepository.filtrar(lancamentoFilter, pageable);
+    }
+
+    @GetMapping(params = "resumo")
+    @PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
+    public Page<ResumoLancamento> resumir(LancamentoFilter lancamentoFilter, Pageable pageable) {
+        return lancamentoRepository.resumir(lancamentoFilter, pageable);
     }
 
     @GetMapping("/{codigo}")
