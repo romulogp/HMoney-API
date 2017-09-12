@@ -1,5 +1,7 @@
 package br.com.hustik.hmoney.api.cors;
 
+import br.com.hustik.hmoney.api.config.property.HMoneyApiProperty;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -18,7 +20,8 @@ import java.io.IOException;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CorsFilter implements Filter {
 
-    private final String originPermitida = "http://localhost:8000"; //TODO: Configurar para diferentes ambientes
+    @Autowired
+    private HMoneyApiProperty apiProperty;
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -26,10 +29,10 @@ public class CorsFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
-        res.setHeader("Access-Control-Allow-Origin", originPermitida);
+        res.setHeader("Access-Control-Allow-Origin", apiProperty.getOriginPermitida());
         res.setHeader("Access-Control-Allow-Credentials", "true"); // Permitir envio do cookie do refresh_token
 
-        if ("OPTIONS".equals(req.getMethod()) && originPermitida.equals(req.getHeader("Origin"))) {
+        if ("OPTIONS".equals(req.getMethod()) && apiProperty.getOriginPermitida().equals(req.getHeader("Origin"))) {
             res.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT, OPTIONS");
             res.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type, Accept");
             res.setHeader("Access-Control-Max-Age", "3600"); // tempo para próxima requisição (CACHE)
