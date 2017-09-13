@@ -46,9 +46,15 @@
 		</dependency>
 
 		<!-- MySQL -->
+		<!--<dependency>-->
+			<!--<groupId>mysql</groupId>-->
+			<!--<artifactId>mysql-connector-java</artifactId>-->
+			<!--<scope>runtime</scope>-->
+		<!--</dependency>-->
+		<!-- PostgreSQL -->
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 		<!-- Migrações - Flyway -->
