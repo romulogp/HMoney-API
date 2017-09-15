@@ -12,6 +12,10 @@ public class HMoneyApiProperty {
         return originPermitida;
     }
 
+    public void setOriginPermitida(String originPermitida) {
+        this.originPermitida = originPermitida;
+    }
+
     public Security getSecurity() {
         return security;
     }
