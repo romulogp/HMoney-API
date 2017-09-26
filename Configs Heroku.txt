@@ -1,0 +1,23 @@
+Configurações Heroku:
+
+1. heroku create nome-do-app
+
+2. heroku addons:create heroku-postgresql:<NOME_PLANO>   (hobby-dev)
+
+3. heroku config
+
+Obter valores da variável DATABASE_URL (muda conforme addon)
+
+4. heroku config:set JDBC_DATABASE_URL=jdbc:postgresql://xxxxxxx JDBC_DATABASE_USERNAME=xxxxxxxx JDBC_DATABASE_PASSWORD=xxxxxxxxxx
+
+5. heroku git:remote -a nome-do-app
+
+Setar variáveis de ambiente:
+6. setx HOME %USERPROFILE%
+
+Se não funcionar, após efetuar login com o comando 'heroku login' basta cancelar a obtenção de credenciais do Windows e colar os valores que estarão disponíveis em %USERPROFILE%/_netrc
+
+7. git push heroku master
+
+Exibir log
+8. heroku logs --tail
